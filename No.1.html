@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ななほし</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F5F3FF; --surface:#FFFFFF; --ink:#1C1B3A; --muted:#5E5C85;
+  --star:#C98A00; --accent:#4B3FBF; --line:#DAD6F5; --on-accent:#FFFFFF;
+  --hero:#E9E5FF;
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142E; --surface:#1C1F45; --ink:#F2F0FF; --muted:#B4B1DD;
+    --star:#F2C14E; --accent:#F2C14E; --line:#34376B; --on-accent:#12142E; --hero:#181B3C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142E; --surface:#1C1F45; --ink:#F2F0FF; --muted:#B4B1DD;
+  --star:#F2C14E; --accent:#F2C14E; --line:#34376B; --on-accent:#12142E; --hero:#181B3C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:auto;scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.8;font-size:16px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;padding-bottom:10px}
+.logo{font-weight:900;font-size:20px;text-decoration:none;letter-spacing:.08em}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{text-decoration:none;padding:6px 12px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted)}
+nav a:hover{background:var(--line);color:var(--ink)}
+
+.hero{background:var(--hero);border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding-top:56px;padding-bottom:56px}
+.hero h1{font-size:clamp(44px,9vw,84px);line-height:1.1;margin:0 0 12px;font-weight:900;letter-spacing:.06em}
+.hero p{margin:0 0 24px;color:var(--muted);max-width:30em}
+.btn{display:inline-block;background:var(--accent);color:var(--on-accent);font-weight:900;text-decoration:none;padding:12px 24px;border-radius:999px;border:0;font:inherit;font-weight:900;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.stars{width:100%;height:auto;max-height:300px}
+.stars line{stroke:var(--line);stroke-width:2;stroke-dasharray:4 5}
+.stars circle{fill:var(--star)}
+.stars circle.big{filter:drop-shadow(0 0 6px var(--star))}
+.stars .tw{animation:tw 3.2s ease-in-out infinite}
+@keyframes tw{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.stars .tw{animation:none}html{scroll-behavior:auto}}
+
+section{padding:56px 0}
+section h2{font-size:28px;margin:0 0 8px;font-weight:900}
+section .lead{margin:0 0 28px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
+a.card:hover{border-color:var(--accent)}
+.thumb{aspect-ratio:16/9;display:grid;place-items:center;font-size:44px;font-weight:900;color:#fff}
+.card .body{padding:14px 16px 18px}
+.card h3{font-size:16px;margin:0 0 4px;line-height:1.5}
+.meta{font-size:13px;color:var(--muted)}
+.more{margin-top:24px}
+
+.tracks{display:grid;gap:12px}
+.track{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.play{width:44px;height:44px;border-radius:50%;background:var(--line);display:grid;place-items:center;grid-row:span 2;color:var(--muted)}
+.track h3{margin:0;font-size:16px}
+.track audio{width:100%;grid-column:2}
+.upload{margin-top:20px;border:2px dashed var(--line);border-radius:16px;padding:20px;color:var(--muted)}
+
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px}
+.plan.best{border-color:var(--accent)}
+.plan .price{font-size:40px;font-weight:900;line-height:1.2}
+.plan .price small{font-size:15px;font-weight:700;color:var(--muted)}
+.plan ul{margin:6px 0 14px;padding-left:20px;color:var(--muted)}
+.tag{align-self:flex-start;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:900;padding:2px 12px;border-radius:999px}
+.note{font-size:13px;color:var(--muted);margin-top:16px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px;text-align:center}
+@media (max-width:720px){.hero .wrap{grid-template-columns:1fr;padding-top:36px;padding-bottom:36px}.stars{max-height:200px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">ななほし</a>
+    <nav aria-label="メニュー">
+      <a href="#articles">記事</a>
+      <a href="#bgm">BGM</a>
+      <a href="#plans">料金</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>ななほし</h1>
+      <p>ゲームが好きな高校生が、文章とBGMをつくっています。noteの記事と、使えるBGMをここにまとめました。</p>
+      <a class="btn" id="noteLink" href="https://note.com/" target="_blank" rel="noopener">noteで記事を読む</a>
+      <a class="btn ghost" href="#bgm">BGMを聴く</a>
+    </div>
+    <svg class="stars" viewBox="0 0 320 240" role="img" aria-label="七つの星が並ぶ星座">
+      <g>
+        <line x1="30" y1="170" x2="85" y2="140"/><line x1="85" y1="140" x2="135" y2="148"/>
+        <line x1="135" y1="148" x2="180" y2="110"/><line x1="180" y1="110" x2="170" y2="60"/>
+        <line x1="170" y1="60" x2="235" y2="45"/><line x1="235" y1="45" x2="290" y2="80"/>
+      </g>
+      <circle class="tw" cx="30" cy="170" r="6"/>
+      <circle class="tw" cx="85" cy="140" r="7" style="animation-delay:.6s"/>
+      <circle class="big" cx="135" cy="148" r="9"/>
+      <circle class="tw" cx="180" cy="110" r="7" style="animation-delay:1.2s"/>
+      <circle class="tw" cx="170" cy="60" r="6" style="animation-delay:1.8s"/>
+      <circle class="big" cx="235" cy="45" r="9"/>
+      <circle class="tw" cx="290" cy="80" r="6" style="animation-delay:2.4s"/>
+    </svg>
+  </div>
+</div>
+
+<section id="articles">
+  <div class="wrap">
+    <h2>記事</h2>
+    <p class="lead">noteで書いた記事です。カードを押すと、noteの記事ページが開きます。</p>
+    <div class="grid" id="articleGrid"></div>
+    <div class="more"><a class="btn" id="noteLink2" href="https://note.com/" target="_blank" rel="noopener">noteの記事をぜんぶ見る</a></div>
+  </div>
+</section>
+
+<section id="bgm" style="background:var(--hero)">
+  <div class="wrap">
+    <h2>BGM</h2>
+    <p class="lead">ゲームや動画に使えるBGMです。契約すると、ダウンロードして使えます。</p>
+    <div class="tracks" id="trackList"></div>
+    <div class="upload"><strong>BGMを追加するとき</strong><br>下の「設定」にある tracks に、曲名・雰囲気・音声ファイルの場所を書き足すと、この一覧に増えます。</div>
+  </div>
+</section>
+
+<section id="plans">
+  <div class="wrap">
+    <h2>BGMの利用プラン</h2>
+    <p class="lead">月ごとか、1年まとめてか、選んで使えます。</p>
+    <div class="plans" id="planList"></div>
+    <p class="note">価格や内容は仮の表示です。決済の仕組みが準備できるまで、申し込みボタンは押せません。</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">© ななほし</div></footer>
+
+<script>
+/* ===== 設定(ここだけ書き換えればOK) ===== */
+const CONFIG = {
+  noteUrl: "https://note.com/",
+  articles: [
+    {title:"記事のタイトルがここに入ります", date:"2026-10-01", url:"https://note.com/", color:"#4B3FBF"},
+    {title:"2本目の記事タイトル", date:"2026-10-03", url:"https://note.com/", color:"#B5497A"},
+    {title:"3本目の記事タイトル", date:"2026-10-05", url:"https://note.com/", color:"#1F7A8C"}
+  ],
+  tracks: [
+    {title:"曲名(仮)1", mood:"わくわく・冒険", length:"2:30", src:""},
+    {title:"曲名(仮)2", mood:"しずか・夜", length:"3:10", src:""}
+  ],
+  plans: [
+    {name:"月額プラン", price:"¥500", unit:"/ 月", items:["すべてのBGMが使い放題","いつでもやめられる"], best:false},
+    {name:"年額プラン", price:"¥5,000", unit:"/ 年", items:["すべてのBGMが使い放題","月額より2ヶ月分おトク"], best:true}
+  ]
+};
+/* ========================================= */
+
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e};
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+document.getElementById("noteLink").href=CONFIG.noteUrl;
+document.getElementById("noteLink2").href=CONFIG.noteUrl;
+
+const ag=document.getElementById("articleGrid");
+CONFIG.articles.forEach(a=>{
+  const c=el("a","card");c.href=a.url;c.target="_blank";c.rel="noopener";
+  c.innerHTML=`<div class="thumb" style="background:${esc(a.color)}" aria-hidden="true">★</div>
+  <div class="body"><h3>${esc(a.title)}</h3><div class="meta">${esc(a.date)}</div></div>`;
+  ag.appendChild(c);
+});
+
+const tl=document.getElementById("trackList");
+CONFIG.tracks.forEach(t=>{
+  const d=el("div","track");
+  d.innerHTML=`<div class="play" aria-hidden="true">♪</div>
+  <div><h3>${esc(t.title)}</h3><span class="meta">${esc(t.mood)} / ${esc(t.length)}</span></div>`;
+  if(t.src){const au=document.createElement("audio");au.controls=true;au.preload="none";au.src=t.src;d.appendChild(au)}
+  else d.appendChild(el("span","meta","音源は準備中です"));
+  tl.appendChild(d);
+});
+
+const pl=document.getElementById("planList");
+CONFIG.plans.forEach(p=>{
+  const d=el("div","plan"+(p.best?" best":""));
+  d.innerHTML=(p.best?'<span class="tag">おすすめ</span>':"")+
+  `<h3 style="margin:0">${esc(p.name)}</h3>
+  <div class="price">${esc(p.price)} <small>${esc(p.unit)}</small></div>
+  <ul>${p.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>
+  <button class="btn" disabled>準備中</button>`;
+  pl.appendChild(d);
+});
+</script>
+</body>
+</html>
